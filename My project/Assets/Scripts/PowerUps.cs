@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUps : MonoBehaviour
+public class PowerUp : PlayerInteractableObjects
 {
-    // Start is called before the first frame update
+    public float speed = 2f;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Move()
     {
-        
+        // Move the power-up downward
+        transform.position += Vector3.down * speed * Time.deltaTime;
     }
+
+    public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
+    {
+        /*Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            ApplyPowerUp(player);
+            Destroy(gameObject);
+        }*/
+    }
+
+    /*void ApplyPowerUp(Player player)
+    {
+        // Define the power-up effect
+        // Example: Increase player's speed
+        player.IncreaseSpeed();
+    }*/
 }

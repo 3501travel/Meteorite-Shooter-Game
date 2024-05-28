@@ -2,18 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInteractableObjects : MonoBehaviour
+public abstract class PlayerInteractableObjects : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    //add collider2d here if it is needed in parent
+
     void Update()
     {
-        
+        Move();
+    }
+
+    protected abstract void Move();
+
+    protected void OnTriggerEnter2D(Collider2D other)
+    {
+        PlayerInteractableObjects otherObject = other.GetComponent<PlayerInteractableObjects>();
+        if (otherObject != null)
+        {
+            InteractWithOtherInteractable(otherObject);
+        }
+    }
+
+    public abstract void InteractWithOtherInteractable(PlayerInteractableObjects otherObject);
+    protected void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }
