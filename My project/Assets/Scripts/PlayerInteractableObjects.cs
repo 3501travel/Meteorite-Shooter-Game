@@ -6,6 +6,12 @@ public abstract class PlayerInteractableObjects : MonoBehaviour
 {
 
     //add collider2d here if it is needed in parent
+    protected new Collider2D collider2D;
+
+    void Start()
+    {
+
+    }
 
     void Update()
     {
