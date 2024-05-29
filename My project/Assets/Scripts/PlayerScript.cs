@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.U2D.IK;
 
 public class PlayerScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public IKManager2D ikManager;
-    public Transform leftHand;
-    public Transform rightHand;
+    public Transform leftHandTarget;
+    public Transform rightHandTarget;
     public Transform rightShoulder;
     public Transform leftShoulder;
     public float armRatio = 0.35f;
+    public Gun leftGun;
+    public Gun rightGun;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -47,16 +51,16 @@ public class PlayerScript : MonoBehaviour
         if (clickedPosition.x < 0)
         {
             // move left hand
-            MoveHandHelper(leftHand,  leftShoulder, clickedPosition);
+            MoveHandHelper(leftHandTarget,  leftShoulder, leftGun, clickedPosition);
         }
         else
         {
             // move right hand
-            MoveHandHelper(rightHand, rightShoulder, clickedPosition);
+            MoveHandHelper(rightHandTarget, rightShoulder, rightGun, clickedPosition);
         }
     }
     
-    private void MoveHandHelper(Transform hand, Transform shoulder, Vector3 clickedPosition)
+    private void MoveHandHelper(Transform handTarget, Transform shoulder, Gun gun, Vector3 clickedPosition)
     {
         Vector3 direction = clickedPosition - shoulder.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -64,6 +68,9 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Angle: " + angle);
         // put the target in the right hand in a position that is 1 unit away from the center position in the direction of angle
         Vector3 targetPosition = shoulder.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * armRatio;
-        hand.position = targetPosition;
+        handTarget.position = targetPosition;
+        
+        // shoot a bullet
+        gun.SpawnBullet(handTarget, angle);
     }
 }

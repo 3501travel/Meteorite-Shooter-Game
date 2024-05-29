@@ -19,6 +19,14 @@ public class BulletInteractableObject : PlayerInteractableObjects
         {
             bulletDirection.x *= -1;
             bounceCount++;
+            
+            // get symmetric of bullet 
+            // similar to transform.Rotate(Vector3.forward, angle);
+            // transform.Rotate(Vector3.forward, 180); //get the angle from bullet direction x and y
+            float angle = Mathf.Atan2(bulletDirection.y, bulletDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            
 
             if(bounceCount >= MAX_BOUNCE_COUNT)
             {
