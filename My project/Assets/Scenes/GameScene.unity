@@ -992,13 +992,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1513258465}
   - component: {fileID: 1513258466}
+  - component: {fileID: 1513258467}
   m_Layer: 0
   m_Name: gun1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1513258465
 Transform:
   m_ObjectHideFlags: 0
@@ -1066,6 +1067,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1513258467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513258464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080ec7ea6af1d40a294c7590c9bcb1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1139171008627154873, guid: dfb7d243b415b4e63a62cab9ea5ecf00, type: 3}
+  speed: 30
 --- !u!1 &1541893158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1974463979}
   - component: {fileID: 1974463980}
+  - component: {fileID: 1974463981}
   m_Layer: 0
   m_Name: gun2
   m_TagString: Untagged
@@ -1614,6 +1630,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1974463981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974463978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 080ec7ea6af1d40a294c7590c9bcb1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1139171008627154873, guid: dfb7d243b415b4e63a62cab9ea5ecf00, type: 3}
+  speed: 30
 --- !u!1 &1982709515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,11 +1695,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1245808994}
   ikManager: {fileID: 1245808992}
-  leftHand: {fileID: 1337546920}
-  rightHand: {fileID: 1062784875}
+  leftHandTarget: {fileID: 1337546920}
+  rightHandTarget: {fileID: 1062784875}
   rightShoulder: {fileID: 1444596416}
   leftShoulder: {fileID: 1291563049}
   armRatio: 1
+  leftGun: {fileID: 1974463981}
+  rightGun: {fileID: 1513258467}
 --- !u!1 &2036672672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2036672673
 Transform:
   m_ObjectHideFlags: 0
