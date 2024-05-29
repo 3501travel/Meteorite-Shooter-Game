@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Meteorite : MonoBehaviour
-{
-    // Start is called before the first frame update
-    
-
+{    
     public GameObject meteoritePrefab;
     public float spawnInterval = 2f;
     public Transform[] spawnPoints;

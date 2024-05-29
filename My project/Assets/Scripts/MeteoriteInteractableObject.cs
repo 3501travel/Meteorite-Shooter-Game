@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteoriteMovement : PlayerInteractableObjects
+public class MeteoriteInteractable : PlayerInteractableObjects
 {
     public float speed = 5f;
     public float horizontalSpeed;
@@ -36,8 +36,6 @@ public class MeteoriteMovement : PlayerInteractableObjects
         //player.TakeDamage(10);
         Destroy(gameObject);
     }
-
-    
 }
 
 
