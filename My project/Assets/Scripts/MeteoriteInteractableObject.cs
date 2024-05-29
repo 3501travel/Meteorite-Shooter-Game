@@ -33,7 +33,19 @@ public class MeteoriteInteractable : PlayerInteractableObjects
 
     public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
     {
-        //player.TakeDamage(10);
+        //player.TakeDamage(10); if needed
+
+        if (other is BulletInteractableObject) //maybe delete this since this interaction is defined in bullet, may add other types.
+        {
+            BulletInteractableObject bullet = other as BulletInteractableObject;
+            //InteractWithMeteorite(meteorite);
+        }
+        else if (other is PowerUp)
+        {
+            PowerUp powerUp = other as PowerUp;
+            //InteractWithPowerUp(powerUp);
+        }
+
         Destroy(gameObject);
     }
 }
