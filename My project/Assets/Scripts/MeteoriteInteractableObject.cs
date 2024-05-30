@@ -12,6 +12,10 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     {
         horizontalSpeed = Random.Range(1f, 4f);
         horizontalDirection = Random.Range(0, 2) == 0 ? -1 : 1;
+        if (!GetComponent<Collider2D>())
+        {
+            gameObject.AddComponent<CircleCollider2D>().isTrigger = true; // Add a CircleCollider2D if not present
+        }
     }
 
     void Update()
@@ -33,20 +37,14 @@ public class MeteoriteInteractable : PlayerInteractableObjects
 
     public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
     {
-        //player.TakeDamage(10); if needed
+        //player.TakeDamage(10);
 
-        if (other is BulletInteractableObject) //maybe delete this since this interaction is defined in bullet, may add other types.
+        if (other is BulletInteractableObject)
         {
-            BulletInteractableObject bullet = other as BulletInteractableObject;
-            //InteractWithMeteorite(meteorite);
-        }
-        else if (other is PowerUp)
-        {
-            PowerUp powerUp = other as PowerUp;
-            //InteractWithPowerUp(powerUp);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        
     }
 }
 

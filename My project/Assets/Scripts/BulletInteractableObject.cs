@@ -10,6 +10,15 @@ public class BulletInteractableObject : PlayerInteractableObjects
     private const int MAX_BOUNCE_COUNT = 5;
     void Start()
     {
+        if (!GetComponent<Collider2D>())
+        {
+            gameObject.AddComponent<BoxCollider2D>().isTrigger = true; // Add a BoxCollider2D if not present
+        }
+        if (!GetComponent<Rigidbody2D>())
+        {
+            var rb = gameObject.AddComponent<Rigidbody2D>();
+            rb.isKinematic = true; // Set Rigidbody2D as kinematic
+        }
 
     }
 
@@ -52,7 +61,8 @@ public class BulletInteractableObject : PlayerInteractableObjects
 
         if (other is MeteoriteInteractable)
         {
-            MeteoriteInteractable meteorite = other as MeteoriteInteractable;
+            Destroy(gameObject);
+            Debug.Log("Bullet touched a meteorite.");
             //InteractWithMeteorite(meteorite);
         }
         else if (other is PowerUp)
@@ -60,8 +70,5 @@ public class BulletInteractableObject : PlayerInteractableObjects
             PowerUp powerUp = other as PowerUp;
             //InteractWithPowerUp(powerUp);
         }
-
-        Destroy(gameObject);
-        //Destroy(other.gameObject); maybe add this in the other object's coll func.
     }
 }
