@@ -8,13 +8,15 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     public float horizontalSpeed;
     public float rotationSpeed = 100f;
     private float horizontalDirection;
+    public GameObject impactPrefab;
+
     void Start()
     {
         horizontalSpeed = Random.Range(1f, 4f);
         horizontalDirection = Random.Range(0, 2) == 0 ? -1 : 1;
         if (!GetComponent<Collider2D>())
         {
-            gameObject.AddComponent<CircleCollider2D>().isTrigger = true; // Add a CircleCollider2D if not present
+            gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
         }
     }
 
@@ -37,15 +39,40 @@ public class MeteoriteInteractable : PlayerInteractableObjects
 
     public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
     {
-        //player.TakeDamage(10);
-
+        Debug.Log("Interacting with another interactable");
         if (other is BulletInteractableObject)
         {
+            Debug.Log("Interacted with BulletInteractableObject");
             Destroy(gameObject);
-        }
+            GameObject impactPref = Instantiate(impactPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Impact prefab instantiated");
 
-        
+            CoroutineRunner.EnsureInstance();
+
+            if (CoroutineRunner.Instance != null)
+            {
+                CoroutineRunner.Instance.RunCoroutine(DestroyAfterDelay(impactPref, 2f)); 
+            }
+            else
+            {
+                Debug.LogError("CoroutineRunner instance is null. Ensure CoroutineRunner is present in the scene.");
+            }
+        }       
+    }
+
+    private IEnumerator DestroyAfterDelay(GameObject obj, float delay)
+    {
+        Debug.Log("Started coroutine to destroy object after delay");
+        yield return new WaitForSecondsRealtime(delay);
+        Debug.Log("Waited for " + delay + " seconds");
+        if (obj != null)
+        {
+            Debug.Log("Destroying impact prefab after delay");
+            Destroy(obj);
+        }
+        else
+        {
+            Debug.LogWarning("Impact prefab is already destroyed or null");
+        }
     }
 }
-
-
