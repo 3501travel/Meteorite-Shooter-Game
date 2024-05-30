@@ -8,7 +8,9 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     public float horizontalSpeed;
     public float rotationSpeed = 100f;
     private float horizontalDirection;
-    public GameObject impactPrefab; // Impact prefab for destruction animation
+    public GameObject impactPrefab;
+    public GameObject fireVFXPrefab; 
+    private GameObject fireVFX; // Store reference to the instantiated fire VFX
 
     void Start()
     {
@@ -18,6 +20,10 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         {
             gameObject.AddComponent<CircleCollider2D>().isTrigger = true; // Add a CircleCollider2D if not present
         }
+
+        // Instantiate the fire VFX and make it a child of the meteorite
+        fireVFX = Instantiate(fireVFXPrefab, transform.position, Quaternion.identity, transform);
+        fireVFX.transform.localPosition = Vector3.zero; // Ensure the fire VFX is centered on the meteorite
     }
 
     void Update()
@@ -39,14 +45,10 @@ public class MeteoriteInteractable : PlayerInteractableObjects
 
     public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
     {
-        //player.TakeDamage(10);
-
         if (other is BulletInteractableObject)
         {
-            Destroy(gameObject);
             Instantiate(impactPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }       
     }
 }
-
-
