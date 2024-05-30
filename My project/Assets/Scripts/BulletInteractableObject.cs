@@ -27,7 +27,7 @@ public class BulletInteractableObject : PlayerInteractableObjects
 
     void Update()
     {
-        if (transform.position.x <= -2 || transform.position.x >= 2)
+        if (transform.position.x <= -1.9 || transform.position.x >= 1.9)
         {
             bulletDirection.x *= -1;
             bounceCount++;

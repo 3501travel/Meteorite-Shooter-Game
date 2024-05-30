@@ -26,7 +26,7 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     {
         Move();
 
-        if (transform.position.x <= -2 || transform.position.x >= 2)
+        if (transform.position.x <= -1.9 || transform.position.x >= 1.9)
         {
             horizontalDirection *= -1;
         }
