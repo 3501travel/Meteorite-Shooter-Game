@@ -8,6 +8,8 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     public float horizontalSpeed;
     public float rotationSpeed = 100f;
     private float horizontalDirection;
+    public GameObject impactPrefab; // Impact prefab for destruction animation
+
     void Start()
     {
         horizontalSpeed = Random.Range(1f, 4f);
@@ -42,9 +44,8 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         if (other is BulletInteractableObject)
         {
             Destroy(gameObject);
-        }
-
-        
+            Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        }       
     }
 }
 
