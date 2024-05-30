@@ -9,9 +9,11 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     public float rotationSpeed = 100f;
     private float horizontalDirection;
     public GameObject impactPrefab;
+    public GameManager gameManager;
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         horizontalSpeed = Random.Range(1f, 4f);
         horizontalDirection = Random.Range(0, 2) == 0 ? -1 : 1;
         if (!GetComponent<Collider2D>())
@@ -27,6 +29,11 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         if (transform.position.x <= -2 || transform.position.x >= 2)
         {
             horizontalDirection *= -1;
+        }
+
+        if (transform.position.y <= -4){
+            gameManager.changeLive(-1);
+            Destroy(gameObject);
         }
     }
 
