@@ -5,19 +5,16 @@ using UnityEngine;
 public class PowerUpInteractable : PlayerInteractableObjects
 {
     public GameObject impactPrefab;
-    public GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         if (!GetComponent<Collider2D>())
         {
             gameObject.AddComponent<CircleCollider2D>().isTrigger = true;
         }
         //destroy after 4 seconds if not hit.
-        CoroutineRunner.EnsureInstance();
-        CoroutineRunner.Instance.RunCoroutine(DestroyAfterDelay(gameObject, 4f)); 
-
+        StartCoroutine(DestroyAfterDelay(gameObject, 4f));
     }
 
     // Update is called once per frame
@@ -58,6 +55,23 @@ public class PowerUpInteractable : PlayerInteractableObjects
                 Debug.LogError("CoroutineRunner instance is null. Ensure CoroutineRunner is present in the scene.");
             }
         }       
+    }
+    
+    private void impactAnimation()
+    {
+        GameObject impactPref = Instantiate(impactPrefab, transform.position, Quaternion.identity);
+        Debug.Log("Impact prefab instantiated");
+
+        CoroutineRunner.EnsureInstance();
+
+        if (CoroutineRunner.Instance != null)
+        {
+            CoroutineRunner.Instance.RunCoroutine(DestroyAfterDelay(impactPref, 2f)); 
+        }
+        else
+        {
+            Debug.LogError("CoroutineRunner instance is null. Ensure CoroutineRunner is present in the scene.");
+        }
     }
 
     void ApplyPowerUp()

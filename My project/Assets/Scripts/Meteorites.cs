@@ -7,7 +7,6 @@ public class Meteorite : MonoBehaviour
     public GameObject[] meteoritePrefabs;
     public float spawnInterval = 2f;
     public Transform[] spawnPoints;
-    public float speed = 30f;
 
     void Start()
     {

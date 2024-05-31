@@ -37,8 +37,8 @@ public class PowerUp : MonoBehaviour
         for (int i = 0; i < numberOfPoints; i++)
         {
             // Generate random x and y coordinates within the screen bounds
-            float randomX = Random.Range(-screenWidth / 2 + 0.3f, screenWidth / 2 - 0.3f);
-            float randomY = Random.Range(-screenHeight / 2, screenHeight / 2);
+            float randomX = Random.Range(-screenWidth / 2 + 0.5f, screenWidth / 2 - 0.5f);
+            float randomY = Random.Range(0, screenHeight / 2.5f);
             
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0);
             

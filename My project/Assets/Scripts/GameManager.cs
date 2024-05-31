@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreTextTMP;
     public TextMeshProUGUI liveTextTMP;
 
+    private int _score = 0;
+    private int _lives = 5;
+
+    private LevelData _levelData;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,9 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeGameData()
     {
-        GameData.score = 0;
-        GameData.lives = 5;
-        GameData.currentLevel = 1;
+        _levelData = LevelDataManager.GetLevelData(1);
         UpdateUI();
     }
 
@@ -39,20 +42,35 @@ public class GameManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        scoreTextTMP.text = "Score: " + GameData.score.ToString();
-        liveTextTMP.text = "Live: " + GameData.lives.ToString();
+        scoreTextTMP.text = "Score: " + _score.ToString();
+        liveTextTMP.text = "Live: " + _lives.ToString();
     }
 
     public void IncreaseScore(int amount)
     {
-        GameData.score += amount;
-        scoreTextTMP.text = "Score: " + GameData.score.ToString();
+        _score += amount;
+        scoreTextTMP.text = "Score: " + _score.ToString();
     }
 
     public void ChangeLive(int amount)
     {
-        GameData.lives += amount;
-        liveTextTMP.text = "Live: " + GameData.lives.ToString();
+        _lives += amount;
+        liveTextTMP.text = "Live: " + _lives.ToString();
+    }
+    
+    public LevelData GetLevelData()
+    {
+        return _levelData;
+    }
+    
+    public int GetScore()
+    {
+        return _score;
+    }
+    
+    public int GetLives()
+    {
+        return _lives;
     }
 }
 

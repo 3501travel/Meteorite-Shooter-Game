@@ -343,7 +343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112678183}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.14580554, w: 0.9893133}
+  m_LocalRotation: {x: 0, y: 0, z: -0.14580522, w: 0.9893133}
   m_LocalPosition: {x: 0.7048459, y: 1.4977978, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1100,7 +1100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417285118}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.24459925, w: 0.9696243}
+  m_LocalRotation: {x: 0, y: 0, z: 0.24459973, w: 0.96962416}
   m_LocalPosition: {x: 0.601563, y: 0.000000036443236, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1394,7 +1394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806976631}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.98832774, w: 0.15234268}
+  m_LocalRotation: {x: 0, y: 0, z: -0.98832774, w: 0.15234289}
   m_LocalPosition: {x: -0.68281937, y: 1.5271661, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1571,7 +1571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849368267}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.037995752, w: 0.9992779}
+  m_LocalRotation: {x: -0, y: -0, z: -0.03799653, w: 0.99927795}
   m_LocalPosition: {x: 0.86, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1602,7 +1602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915733623}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.0000013262033, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0000011324883, w: 1}
   m_LocalPosition: {x: 0.86, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1645,7 +1645,6 @@ MonoBehaviour:
   - {fileID: 6123279987556253554, guid: 543f85c367b24464098124fcc11a6955, type: 3}
   spawnInterval: 2
   spawnPoints: []
-  speed: 30
 --- !u!114 &1918135451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,7 +1954,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1918135452}
   - {fileID: 519420032}
   - {fileID: 1564552428}
   - {fileID: 825650270}
-  - {fileID: 1918135452}
