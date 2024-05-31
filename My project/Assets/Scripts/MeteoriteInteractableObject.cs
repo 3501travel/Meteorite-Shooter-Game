@@ -8,12 +8,10 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     public float horizontalSpeed;
     public float rotationSpeed = 100f;
     private float horizontalDirection;
-    public GameObject impactPrefab;
-    public GameManager gameManager;
+    public GameObject[] impactPrefab;
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         horizontalSpeed = Random.Range(1f, 4f);
         horizontalDirection = Random.Range(0, 2) == 0 ? -1 : 1;
         if (!GetComponent<Collider2D>())
@@ -32,15 +30,16 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         }
 
         if (transform.position.y <= -4){
-            gameManager.changeLive(-1);
+            GameManager.Instance.ChangeLive(-1);
             Destroy(gameObject);
+            impactAnimation();
         }
     }
 
     protected override void Move()
     {
-        transform.position += Vector3.down * speed * Time.deltaTime;
-        transform.position += Vector3.right * horizontalDirection * horizontalSpeed * Time.deltaTime;
+        transform.position += Vector3.down * (speed * Time.deltaTime);
+        transform.position += Vector3.right * (horizontalDirection * horizontalSpeed * Time.deltaTime);
         transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
     }
 
@@ -51,20 +50,26 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         {
             Debug.Log("Interacted with BulletInteractableObject");
             Destroy(gameObject);
-            GameObject impactPref = Instantiate(impactPrefab, transform.position, Quaternion.identity);
-            Debug.Log("Impact prefab instantiated");
-
-            CoroutineRunner.EnsureInstance();
-
-            if (CoroutineRunner.Instance != null)
-            {
-                CoroutineRunner.Instance.RunCoroutine(DestroyAfterDelay(impactPref, 2f)); 
-            }
-            else
-            {
-                Debug.LogError("CoroutineRunner instance is null. Ensure CoroutineRunner is present in the scene.");
-            }
+            impactAnimation();
         }       
+    }
+
+    private void impactAnimation()
+    {
+        int impactPrefabIndex = Random.Range(0, impactPrefab.Length);
+        GameObject impactPref = Instantiate(impactPrefab[impactPrefabIndex], transform.position, Quaternion.identity);
+        Debug.Log("Impact prefab instantiated");
+
+        CoroutineRunner.EnsureInstance();
+
+        if (CoroutineRunner.Instance != null)
+        {
+            CoroutineRunner.Instance.RunCoroutine(DestroyAfterDelay(impactPref, 2f)); 
+        }
+        else
+        {
+            Debug.LogError("CoroutineRunner instance is null. Ensure CoroutineRunner is present in the scene.");
+        }
     }
 
     private IEnumerator DestroyAfterDelay(GameObject obj, float delay)

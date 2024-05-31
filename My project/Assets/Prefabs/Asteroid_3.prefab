@@ -99,5 +99,6 @@ MonoBehaviour:
   speed: 5
   horizontalSpeed: 0
   rotationSpeed: 100
-  impactPrefab: {fileID: 8038344524183138613, guid: 4b7ae0b3de9554390b82ecf7849cfd65, type: 3}
-  gameManager: {fileID: 0}
+  impactPrefab:
+  - {fileID: 4794043405585894037, guid: fc070e72b182a438388c6811ea140fa1, type: 3}
+  - {fileID: 8038344524183138613, guid: 4b7ae0b3de9554390b82ecf7849cfd65, type: 3}

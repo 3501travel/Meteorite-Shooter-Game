@@ -2,40 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public TextMeshProUGUI scoreTextTMP;
     public TextMeshProUGUI liveTextTMP;
 
-    private int score = 0;
-    public int Score => score;
-
-    private int live = 5;
-    public int Live => live;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        scoreTextTMP.text = "Score: " + score.ToString();
-        liveTextTMP.text = "Live: " + live.ToString();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            InitializeGameData();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void InitializeGameData()
     {
-
+        GameData.score = 0;
+        GameData.lives = 5;
+        GameData.currentLevel = 1;
+        UpdateUI();
     }
 
-    public void increaseScore(int amount)
+    private void Start()
     {
-        score += amount;
-        scoreTextTMP.text = "Score: " + score.ToString();
-
-        // You can add UI update logic here if you have a UI element to display the score
+        UpdateUI();
     }
 
-    public void changeLive(int amount)
+    private void UpdateUI()
     {
-        live += amount;
-        liveTextTMP.text = "Live: " + live.ToString();
-    } 
+        scoreTextTMP.text = "Score: " + GameData.score.ToString();
+        liveTextTMP.text = "Live: " + GameData.lives.ToString();
+    }
+
+    public void IncreaseScore(int amount)
+    {
+        GameData.score += amount;
+        scoreTextTMP.text = "Score: " + GameData.score.ToString();
+    }
+
+    public void ChangeLive(int amount)
+    {
+        GameData.lives += amount;
+        liveTextTMP.text = "Live: " + GameData.lives.ToString();
+    }
 }
+
