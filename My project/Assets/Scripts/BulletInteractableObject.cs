@@ -66,9 +66,11 @@ public class BulletInteractableObject : PlayerInteractableObjects
             GameManager.Instance.IncreaseScore((bounceCount + 1 )* 10);
             //InteractWithMeteorite(meteorite);
         }
-        else if (other is PowerUp)
+        else if (other is PowerUpInteractable)
         {
-            PowerUp powerUp = other as PowerUp;
+            Destroy(gameObject);
+            Debug.Log("Bullet hit a powerup.");
+            //PowerUp powerUp = other as PowerUp;
             //InteractWithPowerUp(powerUp);
         }
     }
