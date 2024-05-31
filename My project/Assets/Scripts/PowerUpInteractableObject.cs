@@ -41,19 +41,7 @@ public class PowerUpInteractable : PlayerInteractableObjects
             // }
             Debug.Log("Powerup Interacted with BulletInteractableObject");
             Destroy(gameObject);
-            GameObject impactPref = Instantiate(impactPrefab, transform.position, Quaternion.identity);
-            Debug.Log("Impact prefab instantiated");
-
-            CoroutineRunner.EnsureInstance();
-
-            if (CoroutineRunner.Instance != null)
-            {
-                CoroutineRunner.Instance.RunCoroutine(DestroyAfterDelay(impactPref, 2f)); 
-            }
-            else
-            {
-                Debug.LogError("CoroutineRunner instance is null. Ensure CoroutineRunner is present in the scene.");
-            }
+            impactAnimation();
         }       
     }
     
