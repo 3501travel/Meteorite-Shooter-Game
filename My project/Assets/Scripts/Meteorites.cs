@@ -5,39 +5,37 @@ using UnityEngine;
 public class Meteorite : MonoBehaviour
 {    
     public GameObject[] meteoritePrefabs;
-    public float spawnInterval = 2f;
-    public Transform[] spawnPoints;
+    public float spawnIntervalFactor = 2f;
+    private int meteoriteCount = 0;
 
     void Start()
     {
-        spawnPoints = CreateSpawnPoints(10);
+        meteoriteCount = GameManager.Instance.GetLevelData().totalMeteoriteCount;
+        spawnIntervalFactor = GameManager.Instance.GetLevelData().spawnIntervalFactor;
         StartCoroutine(SpawnMeteorites());
     }
 
     IEnumerator SpawnMeteorites()
     {
-        while (true)
+        for (int i = 0; i < meteoriteCount; i++)
         {
+            Vector3 spawnPoint = CreateSpawnPoint();
+            float spawnInterval = Random.Range(spawnIntervalFactor*0.75f, spawnIntervalFactor*1.25f);
             yield return new WaitForSeconds(spawnInterval);
-            int spawnIndex = Random.Range(0, spawnPoints.Length);
             int meteoriteIndex = Random.Range(0, meteoritePrefabs.Length);
-            Instantiate(meteoritePrefabs[meteoriteIndex], spawnPoints[spawnIndex].position, Quaternion.identity);
+            Instantiate(meteoritePrefabs[meteoriteIndex], spawnPoint, Quaternion.identity);
+            if(spawnIntervalFactor > 0.5f) spawnIntervalFactor -= 0.02f;
         }
+        
+        GameManager.Instance.FinishGame(true);
     }
-    Transform[] CreateSpawnPoints(int numberOfPoints)
+    
+    Vector3 CreateSpawnPoint()
     {
-        Transform[] points = new Transform[numberOfPoints];
         float screenWidth = Camera.main.orthographicSize * Camera.main.aspect;
 
-        for (int i = 0; i < numberOfPoints; i++)
-        {
-            float randomX = Random.Range(-1, 1);
-            Vector3 spawnPosition = new Vector3(randomX*1.8f, 5, 0);
-            GameObject spawnPoint = new GameObject("SpawnPoint" + i);
-            spawnPoint.transform.position = spawnPosition;
-            points[i] = spawnPoint.transform;
-        }
-
-        return points;
+        float randomX = Random.Range(-1, 1);
+        Vector3 spawnPosition = new Vector3(randomX*1.5f, 5, 0);
+        return spawnPosition;
     }
 }

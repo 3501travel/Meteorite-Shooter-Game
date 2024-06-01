@@ -5,6 +5,8 @@ using UnityEngine;
 public class MeteoriteInteractable : PlayerInteractableObjects
 {
     private float speed = 5f;
+    private float speedIncrease = 0.5f;
+    private float sizeFactor = 2f;
     public float horizontalSpeed;
     public float rotationSpeed = 100f;
     private float horizontalDirection;
@@ -13,6 +15,8 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     void Start()
     {
         speed = GameManager.Instance.GetLevelData().meteoriteInitialSpeed;
+        speedIncrease = GameManager.Instance.GetLevelData().meteoriteSpeedIncreaseFactor;
+        sizeFactor = GameManager.Instance.GetLevelData().meteoriteSizeFactor;
         horizontalSpeed = Random.Range(1f, 4f);
         horizontalDirection = Random.Range(0, 2) == 0 ? -1 : 1;
         if (!GetComponent<Collider2D>())

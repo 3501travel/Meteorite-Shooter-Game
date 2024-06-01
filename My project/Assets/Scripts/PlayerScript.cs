@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.GameFinished) return;
         // Handle touch input
         if (Input.touchCount > 0)
         {

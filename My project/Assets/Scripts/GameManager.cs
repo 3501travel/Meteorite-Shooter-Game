@@ -9,11 +9,14 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI scoreTextTMP;
     public TextMeshProUGUI liveTextTMP;
+    public GameOverHandler gameOverHandler;
 
     private int _score = 0;
     private int _lives = 5;
 
     private LevelData _levelData;
+    private bool _gameFinished = false;
+    public bool GameFinished => _gameFinished;
 
     private void Awake()
     {
@@ -31,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void InitializeGameData()
     {
-        _levelData = LevelDataManager.GetLevelData(1);
+        _levelData = LevelDataManager.GetLevelData();
         UpdateUI();
     }
 
@@ -56,6 +59,11 @@ public class GameManager : MonoBehaviour
     {
         _lives += amount;
         liveTextTMP.text = "Live: " + _lives.ToString();
+        
+        if (_lives <= 0)
+        {
+            FinishGame(false);
+        }
     }
     
     public LevelData GetLevelData()
@@ -71,6 +79,19 @@ public class GameManager : MonoBehaviour
     public int GetLives()
     {
         return _lives;
+    }
+    
+    public void FinishGame(bool isWin)
+    {
+        Debug.Log("Game finished");
+        _gameFinished = true;
+        gameOverHandler.SetGameOver(isWin);
+        if (isWin)
+        {
+            LevelDataManager.IncreaseSelectedLevel();
+        }
+        
+        Destroy(gameObject);
     }
 }
 
