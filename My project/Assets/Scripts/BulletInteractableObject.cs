@@ -8,6 +8,7 @@ public class BulletInteractableObject : PlayerInteractableObjects
     public Vector3 bulletDirection = Vector3.zero;
     private int bounceCount = 0;
     private const int MAX_BOUNCE_COUNT = 5;
+    private Gun gun;
     void Start()
     {
         if (!GetComponent<Collider2D>())
@@ -55,6 +56,10 @@ public class BulletInteractableObject : PlayerInteractableObjects
     {
         bulletDirection = direction;
     }
+    public void SetGun(Gun gun)
+    {
+        this.gun = gun;
+    }
 
     public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
     {
@@ -64,6 +69,7 @@ public class BulletInteractableObject : PlayerInteractableObjects
             Destroy(gameObject);
             Debug.Log("Bullet touched a meteorite.");
             GameManager.Instance.IncreaseScore((bounceCount + 1 )* 10);
+            gun.IncreaseBulletCount(1);
             //InteractWithMeteorite(meteorite);
         }
         else if (other is PowerUpInteractable)

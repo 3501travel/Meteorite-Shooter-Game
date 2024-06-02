@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     private int _score = 0;
     private int _lives = 5;
-
     private LevelData _levelData;
     private bool _gameFinished = false;
     public bool GameFinished => _gameFinished;
@@ -47,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         scoreTextTMP.text = "Score: " + _score.ToString();
         liveTextTMP.text = "Live: " + _lives.ToString();
+        
     }
 
     public void IncreaseScore(int amount)

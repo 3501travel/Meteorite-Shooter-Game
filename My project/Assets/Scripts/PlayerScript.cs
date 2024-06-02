@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.U2D.IK;
-
+using TMPro;
 public class PlayerScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
@@ -15,11 +15,15 @@ public class PlayerScript : MonoBehaviour
     public float armRatio = 0.35f;
     public Gun leftGun;
     public Gun rightGun;
+    public TextMeshProUGUI rightBulletCountTMP;
+    public TextMeshProUGUI leftBulletCountTMP;
     
     
     // Start is called before the first frame update
     void Start()
     {
+        leftGun.bulletCount = 5;
+        rightGun.bulletCount = 5;
 
     }
 
@@ -45,6 +49,12 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Mouse clicked at position: " + mousePosition);
             MoveHand(mousePosition);
         }
+        UpdateBulletCountUI();
+    }
+    private void UpdateBulletCountUI()
+    {
+        rightBulletCountTMP.text = "x" + rightGun.bulletCount.ToString();
+        leftBulletCountTMP.text = "x" + leftGun.bulletCount.ToString();
     }
     
     public void MoveHand(Vector3 clickedPosition)
@@ -71,7 +81,16 @@ public class PlayerScript : MonoBehaviour
         Vector3 targetPosition = shoulder.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * armRatio;
         handTarget.position = targetPosition;
         
-        // shoot a bullet
-        gun.SpawnBullet(handTarget, angle);
+        if (gun.bulletCount > 0)
+        {
+            gun.SpawnBullet(handTarget, angle);
+            gun.bulletCount--;
+        }
+        else
+        {
+            Debug.Log("Out of bullets for " + gun.name);
+        }
+
+        UpdateBulletCountUI();
     }
 }

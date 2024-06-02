@@ -11,7 +11,6 @@ public static class LevelDataManager
     {
         get
         {
-            return 1;
             return PlayerPrefs.GetInt("SelectedLevel", 1);
         }
         set
