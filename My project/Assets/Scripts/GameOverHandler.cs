@@ -42,11 +42,13 @@ public class GameOverHandler : MonoBehaviour
     private void OnRestartButtonClicked()
     {
         Debug.Log("Restart button clicked");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnNextButtonClicked()
     {
         Debug.Log("Next button clicked");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void SetGameOver(bool isWin)
