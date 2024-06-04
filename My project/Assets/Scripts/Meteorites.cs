@@ -23,11 +23,17 @@ public class Meteorite : MonoBehaviour
             float spawnInterval = Random.Range(spawnIntervalFactor*0.75f, spawnIntervalFactor*1.25f);
             yield return new WaitForSeconds(spawnInterval);
             int meteoriteIndex = Random.Range(0, meteoritePrefabs.Length);
-            Instantiate(meteoritePrefabs[meteoriteIndex], spawnPoint, Quaternion.identity);
+              if (i == meteoriteCount - 1) // Check if last meteorite
+                {
+                    Instantiate(meteoritePrefabs[meteoriteIndex], spawnPoint, Quaternion.identity).GetComponent<MeteoriteInteractable>().isLastMeteorite = true;
+                }
+                else
+                {
+                    Instantiate(meteoritePrefabs[meteoriteIndex], spawnPoint, Quaternion.identity);
+                }
             if(spawnIntervalFactor > 0.5f) spawnIntervalFactor -= 0.02f;
         }
-        
-        GameManager.Instance.FinishGame(true);
+        //GameManager.Instance.FinishGame(true);
     }
     
     Vector3 CreateSpawnPoint()

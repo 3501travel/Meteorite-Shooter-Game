@@ -12,6 +12,8 @@ public class MeteoriteInteractable : PlayerInteractableObjects
     private float horizontalDirection;
     public GameObject[] impactPrefab;
 
+    public bool isLastMeteorite = false;
+
     void Start()
     {
         speed = GameManager.Instance.GetLevelData().meteoriteInitialSpeed;
@@ -35,9 +37,11 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         }
 
         if (transform.position.y <= -4){
-            GameManager.Instance.ChangeLive(-1);
             Destroy(gameObject);
             impactAnimation();
+            if(!GameManager.Instance.GameFinished){
+                GameManager.Instance.ChangeLive(-1);
+            }
         }
     }
 
@@ -56,6 +60,10 @@ public class MeteoriteInteractable : PlayerInteractableObjects
             Debug.Log("Interacted with BulletInteractableObject");
             Destroy(gameObject);
             impactAnimation();
+            if (isLastMeteorite)
+            {
+                GameManager.Instance.FinishGame(true);
+            }
         }       
     }
 
