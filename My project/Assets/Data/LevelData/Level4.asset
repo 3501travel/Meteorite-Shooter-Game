@@ -16,6 +16,6 @@ MonoBehaviour:
   spawnIntervalFactor: 2.7
   meteoriteInitialSpeed: 3.4
   meteoriteSpeedIncreaseFactor: 1.1
-  totalMeteoriteCount: 10
+  totalMeteoriteCount: 20
   totalPowerUpCount: 3
   meteoriteSizeFactor: 1.8

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level6
   m_EditorClassIdentifier: 
   currentLevel: 6
-  spawnIntervalFactor: 2
-  meteoriteInitialSpeed: 3.4
+  spawnIntervalFactor: 2.5
+  meteoriteInitialSpeed: 3.5
   meteoriteSpeedIncreaseFactor: 1.1
-  totalMeteoriteCount: 10
+  totalMeteoriteCount: 25
   totalPowerUpCount: 3
-  meteoriteSizeFactor: 1.8
+  meteoriteSizeFactor: 1.7

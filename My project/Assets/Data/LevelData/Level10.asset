@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24fcaf92d2db244608569026b965b26d, type: 3}
-  m_Name: Level5
+  m_Name: Level10
   m_EditorClassIdentifier: 
-  currentLevel: 5
-  spawnIntervalFactor: 2.7
-  meteoriteInitialSpeed: 3.4
+  currentLevel: 10
+  spawnIntervalFactor: 2.3
+  meteoriteInitialSpeed: 3.7
   meteoriteSpeedIncreaseFactor: 1.1
-  totalMeteoriteCount: 25
-  totalPowerUpCount: 3
-  meteoriteSizeFactor: 1.7
+  totalMeteoriteCount: 50
+  totalPowerUpCount: 5
+  meteoriteSizeFactor: 1.5

@@ -5,6 +5,9 @@ using UnityEngine;
 public class PowerUpInteractable : PlayerInteractableObjects
 {
     public GameObject impactPrefab;
+
+    public enum PowerUpType { PurpleHeart, MagnetBluray, ShieldMetal }
+    public PowerUpType powerUpType;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class PowerUpInteractable : PlayerInteractableObjects
             //     Destroy(gameObject);
             // }
             Debug.Log("Powerup Interacted with BulletInteractableObject");
+            ApplyPowerUp();
             Destroy(gameObject);
             impactAnimation();
         }       
@@ -63,11 +67,23 @@ public class PowerUpInteractable : PlayerInteractableObjects
     }
 
     void ApplyPowerUp()
+{
+    switch (powerUpType)
     {
-        // Define the power-up effect
-        // Example: Increase player's speed
-        //player.IncreaseSpeed();
+        case PowerUpType.PurpleHeart:
+            GameManager.Instance.ChangeLive(1);
+            break;
+        case PowerUpType.MagnetBluray:
+            //Slow down meteorites for 5 seconds.
+            break;
+        case PowerUpType.ShieldMetal:
+            // Activate shield logic to prevent life decrease.
+            break;
+        default:
+            Debug.LogError("Unidentified power-up tag: " + powerUpType);
+            break;
     }
+}
 
     private IEnumerator DestroyAfterDelay(GameObject obj, float delay)
     {
