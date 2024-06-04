@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
     private LevelData _levelData;
     private bool _gameFinished = false;
     public bool GameFinished => _gameFinished;
+    
+    private bool shieldUp = false;
+    public bool ShieldUp
+    {
+        get => shieldUp;
+        set => shieldUp = value;
+    }
 
     private void Awake()
     {

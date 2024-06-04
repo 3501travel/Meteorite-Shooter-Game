@@ -50,6 +50,15 @@ public class PlayerScript : MonoBehaviour
             MoveHand(mousePosition);
         }
         UpdateBulletCountUI();
+        
+        if(GameManager.Instance.ShieldUp)
+        {
+            spriteRenderer.color = Color.HSVToRGB(Mathf.PingPong(Time.time, 1), 1, 1);
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
     private void UpdateBulletCountUI()
     {

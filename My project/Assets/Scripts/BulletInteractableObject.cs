@@ -60,6 +60,11 @@ public class BulletInteractableObject : PlayerInteractableObjects
     {
         this.gun = gun;
     }
+    
+    public Gun GetGun()
+    {
+        return gun;
+    }
 
     public override void InteractWithOtherInteractable(PlayerInteractableObjects other)
     {

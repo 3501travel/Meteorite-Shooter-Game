@@ -39,7 +39,7 @@ public class MeteoriteInteractable : PlayerInteractableObjects
         if (transform.position.y <= -4){
             Destroy(gameObject);
             impactAnimation();
-            if(!GameManager.Instance.GameFinished){
+            if(!GameManager.Instance.GameFinished && !GameManager.Instance.ShieldUp){
                 GameManager.Instance.ChangeLive(-1);
             }
         }

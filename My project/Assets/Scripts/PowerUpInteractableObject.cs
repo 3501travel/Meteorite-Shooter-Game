@@ -6,7 +6,7 @@ public class PowerUpInteractable : PlayerInteractableObjects
 {
     public GameObject impactPrefab;
 
-    public enum PowerUpType { PurpleHeart, MagnetBluray, ShieldMetal }
+    public enum PowerUpType { PurpleHeart, Ammo, Hourglass, ShieldMetal }
     public PowerUpType powerUpType;
     
     // Start is called before the first frame update
@@ -43,7 +43,7 @@ public class PowerUpInteractable : PlayerInteractableObjects
             //     Destroy(gameObject);
             // }
             Debug.Log("Powerup Interacted with BulletInteractableObject");
-            ApplyPowerUp();
+            ApplyPowerUp((BulletInteractableObject) other);
             Destroy(gameObject);
             impactAnimation();
         }       
@@ -66,18 +66,25 @@ public class PowerUpInteractable : PlayerInteractableObjects
         }
     }
 
-    void ApplyPowerUp()
+    void ApplyPowerUp(BulletInteractableObject bulletInteractableObject)
 {
     switch (powerUpType)
     {
         case PowerUpType.PurpleHeart:
             GameManager.Instance.ChangeLive(1);
             break;
-        case PowerUpType.MagnetBluray:
-            //Slow down meteorites for 5 seconds.
+        case PowerUpType.Ammo:
+            bulletInteractableObject.GetGun().IncreaseBulletCount(2);
+            break;
+        case PowerUpType.Hourglass:
+            //Slow down time for 5 seconds
+            Time.timeScale = 0.5f;
+            GameManager.Instance.StartCoroutine(ResetTimeScale(5f));
             break;
         case PowerUpType.ShieldMetal:
             // Activate shield logic to prevent life decrease.
+            GameManager.Instance.ShieldUp = true;
+            GameManager.Instance.StartCoroutine(ResetShield(8f));
             break;
         default:
             Debug.LogError("Unidentified power-up tag: " + powerUpType);
@@ -99,5 +106,17 @@ public class PowerUpInteractable : PlayerInteractableObjects
         {
             Debug.LogWarning("Impact prefab is already destroyed or null");
         }
+    }
+    
+    private IEnumerator ResetTimeScale(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        Time.timeScale = 1f;
+    }
+    
+    private IEnumerator ResetShield(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        GameManager.Instance.ShieldUp = false;
     }
 }
